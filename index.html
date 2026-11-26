@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MODPOD | Simple. Functional. Modular.</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#090909;color:#fff;font-family:Arial,Helvetica,sans-serif;line-height:1.6}
+header{position:sticky;top:0;background:#090909ee;backdrop-filter:blur(10px);border-bottom:1px solid #292929;padding:16px 6%;display:flex;justify-content:space-between;align-items:center;z-index:5}
+.logo{font-size:27px;font-weight:900;letter-spacing:3px}
+nav{display:flex;gap:18px;flex-wrap:wrap}
+nav a{color:#ccc;text-decoration:none;font-size:13px}
+nav a:hover{color:white}
+section{padding:65px 7%;max-width:1100px;margin:auto;scroll-margin-top:75px}
+.hero{min-height:490px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.eyebrow{color:#aaa;letter-spacing:3px;font-size:12px}
+h1{font-size:clamp(42px,8vw,76px);line-height:1.05;margin:15px 0}
+h2{font-size:32px;margin:0 0 15px}
+h3{margin:8px 0}
+p{color:#bdbdbd}
+.muted{color:#999}
+.btn{display:inline-block;background:white;color:#090909;text-decoration:none;border:0;border-radius:3px;padding:13px 22px;font-weight:bold;cursor:pointer}
+.btn:hover{background:#ddd}
+.btn-outline{background:transparent;color:white;border:1px solid #777}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px}
+.card{background:#191919;border:1px solid #303030;border-radius:7px;padding:20px}
+.photo{height:145px;background:#252525;border-radius:5px;display:flex;align-items:center;justify-content:center;color:#777;font-size:12px;letter-spacing:1px;margin-bottom:14px}
+.price{font-size:20px;font-weight:bold}
+.rule{border:0;border-top:1px solid #303030;margin:28px 0}
+form{display:grid;gap:18px}
+label{display:block;font-size:13px;color:#ccc;margin-bottom:6px}
+input,select,textarea{width:100%;background:#101010;color:white;border:1px solid #484848;border-radius:4px;padding:12px;font:inherit}
+input:focus,select:focus,textarea:focus{outline:1px solid white}
+.pod-line{background:#191919;border:1px solid #383838;padding:16px;border-radius:6px;display:grid;gap:12px;margin-bottom:12px}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.summary{background:#202020;border-radius:6px;padding:20px}
+.summary-row{display:flex;justify-content:space-between;gap:15px;margin:8px 0}
+.small{font-size:12px;color:#999}
+.notice{border-left:3px solid #aaa;padding:10px 14px;background:#171717;color:#bbb}
+footer{text-align:center;padding:35px 15px;border-top:1px solid #292929;color:#888;font-size:12px}
+button:disabled{opacity:.4;cursor:not-allowed}
+@media(max-width:650px){
+ header{align-items:flex-start;gap:12px;flex-direction:column}
+ nav{gap:12px}
+ nav a{font-size:12px}
+ section{padding:48px 6%}
+ .fields{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">MODPOD</div>
+  <nav>
+    <a href="#home">HOME</a>
+    <a href="#pods">OUR PODS</a>
+    <a href="#order">ORDER</a>
+    <a href="#shipping">SHIPPING</a>
+    <a href="#contact">CONTACT</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <div class="eyebrow">SIMPLE. FUNCTIONAL. MODULAR.</div>
+  <h1>YOUR POD.<br>YOUR WAY.</h1>
+  <p>Minimal design. Everyday function.</p>
+  <a class="btn" href="#pods">EXPLORE OUR PODS</a>
+</section>
+
+<section id="pods">
+  <div class="eyebrow">THE COLLECTION</div>
+  <h2>OUR PODS</h2>
+  <p>Choose from five Pod variants. Every Pod is $5.00.</p>
+  <div class="grid">
+    <div class="card"><div class="photo">PRODUCT PHOTO COMING SOON</div><h3>Variant 01</h3><div class="price">$5.00</div><p>Available in Black or Gray.</p></div>
+    <div class="card"><div class="photo">PRODUCT PHOTO COMING SOON</div><h3>Variant 02</h3><div class="price">$5.00</div><p>Available in Black or Gray.</p></div>
+    <div class="card"><div class="photo">PRODUCT PHOTO COMING SOON</div><h3>Variant 03</h3><div class="price">$5.00</div><p>Available in Black or Gray.</p></div>
+    <div class="card"><div class="photo">PRODUCT PHOTO COMING SOON</div><h3>Variant 04</h3><div class="price">$5.00</div><p>Available in Black or Gray.</p></div>
+    <div class="card"><div class="photo">PRODUCT PHOTO COMING SOON</div><h3>Variant 05</h3><div class="price">$5.00</div><p>Available in Black or Gray.</p></div>
+  </div>
+  <p class="notice">Minimum order: 2 Pods. Every 2 Pods include 1 free Joint Pin.</p>
+</section>
+
+<section id="order">
+  <div class="eyebrow">MAKE IT YOURS</div>
+  <h2>HOW TO ORDER</h2>
+  <p>Build your order below. Add a separate line for each Pod combination you want.</p>
+
+  <form id="orderForm">
+    <div>
+      <h3>Your Pods</h3>
+      <div id="podLines"></div>
+      <button type="button" class="btn btn-outline" id="addPod">+ ADD ANOTHER POD</button>
+    </div>
+
+    <div class="card">
+      <h3>FREE JOINT PINS</h3>
+      <p>One free Joint Pin for every 2 Pods ordered. Joint Pins cannot be purchased separately. All are the same size.</p>
+      <label for="pinColor">Joint Pin color</label>
+      <select id="pinColor">
+        <option>Black</option>
+        <option>Gray</option>
+      </select>
+      <div class="summary-row"><span>Free Joint Pins</span><strong id="pinQty">1</strong></div>
+      <div class="small">Quantity is automatically calculated from your Pod order. No size or side selection.</div>
+    </div>
+
+    <div class="summary">
+      <h3>ORDER SUMMARY</h3>
+      <div class="summary-row"><span>Total Pods</span><strong id="podQty">2</strong></div>
+      <div class="summary-row"><span>Pod subtotal</span><strong id="subtotal">$10.00</strong></div>
+      <div class="summary-row"><span>Free Joint Pins</span><strong id="pinSummary">1</strong></div>
+      <hr class="rule">
+      <div class="summary-row"><strong>Pod subtotal</strong><strong id="total">$10.00</strong></div>
+      <div class="small">Shipping is calculated after order review. This is not the final order total.</div>
+    </div>
+
+    <div>
+      <h3>Customer Information</h3>
+      <div class="fields">
+        <div><label for="customerName">Full name *</label><input id="customerName" required autocomplete="name"></div>
+        <div><label for="customerEmail">Email address *</label><input id="customerEmail" type="email" required autocomplete="email"></div>
+      </div>
+      <label for="address">Street address *</label>
+      <input id="address" required autocomplete="street-address">
+      <div class="fields">
+        <div><label for="city">City *</label><input id="city" required autocomplete="address-level2"></div>
+        <div><label for="state">State *</label>
+          <select id="state" required>
+            <option value="">Select state</option>
+            <option value="AL">Alabama</option><option value="AZ">Arizona</option>
+            <option value="AR">Arkansas</option><option value="CA">California</option>
+            <option value="CO">Colorado</option><option value="CT">Connecticut</option>
+            <option value="DE">Delaware</option><option value="FL">Florida</option>
+            <option value="GA">Georgia</option><option value="ID">Idaho</option>
+            <option value="IL">Illinois</option><option value="IN">Indiana</option>
+            <option value="IA">Iowa</option><option value="KS">Kansas</option>
+            <option value="KY">Kentucky</option><option value="LA">Louisiana</option>
+            <option value="ME">Maine</option><option value="MD">Maryland</option>
+            <option value="MA">Massachusetts</option><option value="MI">Michigan</option>
+            <option value="MN">Minnesota</option><option value="MS">Mississippi</option>
+            <option value="MO">Missouri</option><option value="MT">Montana</option>
+            <option value="NE">Nebraska</option><option value="NV">Nevada</option>
+            <option value="NH">New Hampshire</option><option value="NJ">New Jersey</option>
+            <option value="NM">New Mexico</option><option value="NY">New York</option>
+            <option value="NC">North Carolina</option><option value="ND">North Dakota</option>
+            <option value="OH">Ohio</option><option value="OK">Oklahoma</option>
+            <option value="OR">Oregon</option><option value="PA">Pennsylvania</option>
+            <option value="RI">Rhode Island</option><option value="SC">South Carolina</option>
+            <option value="SD">South Dakota</option><option value="TN">Tennessee</option>
+            <option value="TX">Texas</option><option value="UT">Utah</option>
+            <option value="VT">Vermont</option><option value="VA">Virginia</option>
+            <option value="WA">Washington</option><option value="WV">West Virginia</option>
+            <option value="WI">Wisconsin</option><option value="WY">Wyoming</option>
+          </select>
+        </div>
+      </div>
+      <label for="zip">ZIP code *</label>
+      <input id="zip" required inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}(-[0-9]{4})?">
+      <label for="notes">Additional notes (optional)</label>
+      <textarea id="notes" rows="3" placeholder="Anything else we should know?"></textarea>
+    </div>
+
+    <div class="notice">
+      <strong>Payment:</strong> After we review your order and calculate shipping, we'll privately send you payment instructions. Venmo is currently planned as the payment method. No payment is collected through this form.
+    </div>
+    <button class="btn" type="submit">SUBMIT ORDER REQUEST</button>
+    <div id="formMessage" class="small" aria-live="polite"></div>
+    <p class="small">Website preview only: this form is not connected to an order inbox yet. Do not enter real personal information until the form has been connected and tested.</p>
+  </form>
+</section>
+
+<section id="shipping">
+  <div class="eyebrow">DELIVERY INFORMATION</div>
+  <h2>SHIPPING</h2>
+  <div class="card">
+    <h3>Continental United States Only</h3>
+    <p>MODPOD currently ships only within the contiguous 48 states. We do not ship to Alaska, Hawaii, US territories, or international destinations.</p>
+    <hr class="rule">
+    <h3>Shipping Cost</h3>
+    <p>Shipping will be calculated after your order is reviewed. We'll confirm the shipping cost and full amount before payment.</p>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="eyebrow">GET IN TOUCH</div>
+  <h2>CONTACT</h2>
+  <p>Have a question about MODPOD or your order?</p>
+  <div class="card">
+    <h3>Email</h3>
+    <p>[Your contact email will be added here]</p>
+  </div>
+</section>
+
+<footer>
+  <div class="logo">MODPOD</div>
+  <p>SIMPLE DESIGN. EVERYDAY FUNCTION.</p>
+  <p>© MODPOD — ALL RIGHTS RESERVED</p>
+</footer>
+
+<script>
+let nextId=2;
+const podLines=document.getElementById("podLines");
+
+function addLine(data={id:nextId++,variant:"Variant 01",color:"Black",side:"Left",qty:1}){
+  const line=document.createElement("div");
+  line.className="pod-line";
+  line.dataset.id=data.id;
+  line.innerHTML=`
+    <div class="summary-row"><strong>Pod selection</strong>
+      <button type="button" class="btn btn-outline remove">REMOVE</button></div>
+    <div><label>Variant</label>
+      <select class="variant">
+        ${["Variant 01","Variant 02","Variant 03","Variant 04","Variant 05"].map(v=>`<option ${v===data.variant?"selected":""}>${v}</option>`).join("")}
+      </select></div>
+    <div class="fields">
+      <div><label>Color</label><select class="color"><option ${data.color==="Black"?"selected":""}>Black</option><option ${data.color==="Gray"?"selected":""}>Gray</option></select></div>
+      <div><label>Side</label><select class="side"><option ${data.side==="Left"?"selected":""}>Left</option><option ${data.side==="Right"?"selected":""}>Right</option></select></div>
+    </div>
+    <div><label>Quantity</label><input class="qty" type="number" min="1" step="1" value="${data.qty}" required></div>
+    <div class="small lineTotal"></div>`;
+  line.querySelectorAll("select,input").forEach(el=>el.addEventListener("change",updateTotals));
+  line.querySelector(".qty").addEventListener("input",updateTotals);
+  line.querySelector(".remove").addEventListener("click",()=>{
+    if(podLines.children.length>1){line.remove();updateTotals();}
+  });
+  podLines.appendChild(line);
+  updateTotals();
+}
+function updateTotals(){
+  let count=0;
+  document.querySelectorAll(".pod-line").forEach(line=>{
+    const input=line.querySelector(".qty");
+    let qty=Math.max(1,Math.floor(Number(input.value)||1));
+    input.value=qty;
+    count+=qty;
+    line.querySelector(".lineTotal").textContent=qty+" × $5.00 = $"+(qty*5).toFixed(2);
+  });
+  const pins=Math.floor(count/2);
+  const amount=count*5;
+  document.getElementById("podQty").textContent=count;
+  document.getElementById("subtotal").textContent="$"+amount.toFixed(2);
+  document.getElementById("total").textContent="$"+amount.toFixed(2);
+  document.getElementById("pinQty").textContent=pins;
+  document.getElementById("pinSummary").textContent=pins;
+}
+document.getElementById("addPod").addEventListener("click",()=>addLine());
+document.getElementById("orderForm").addEventListener("submit",function(e){
+  e.preventDefault();
+  let count=0;
+  document.querySelectorAll(".qty").forEach(input=>count+=Number(input.value)||0);
+  if(count<2){alert("The minimum order is 2 Pods.");return;}
+  if(!this.reportValidity())return;
+  document.getElementById("formMessage").textContent=
+    "Preview only: your order has not been sent. The order form must be connected to a submission service before accepting real orders.";
+});
+addLine({id:1,variant:"Variant 01",color:"Black",side:"Left",qty:2});
+</script>
+</body>
+</html>
