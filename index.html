@@ -36,14 +36,61 @@ section{padding:65px 7%;max-width:1100px;margin:auto;scroll-margin-top:75px}.her
 <div class="card"><h3>FREE JOINT PINS</h3><p>One free Joint Pin for every 2 Pods ordered. Joint Pins cannot be purchased separately. All are the same size.</p><label for="pinColor">Joint Pin color</label><select id="pinColor"><option>Black</option><option>Gray</option></select><div class="summary-row"><span>Free Joint Pins</span><strong id="pinQty">1</strong></div><div class="small">Quantity is automatically calculated from your Pod order. No size or side selection.</div></div>
 <div class="summary"><h3>ORDER SUMMARY</h3><div class="summary-row"><span>Total Pods</span><strong id="podQty">2</strong></div><div class="summary-row"><span>Pod subtotal</span><strong id="subtotal">$10.00</strong></div><div class="summary-row"><span>Free Joint Pins</span><strong id="pinSummary">1</strong></div><hr class="rule"><div class="summary-row"><strong>Pod subtotal</strong><strong id="total">$10.00</strong></div><div class="small">Shipping is calculated after order review. This is not the final order total.</div></div>
 <div><h3>Customer Information</h3><div class="fields"><div><label for="customerName">Full name *</label><input id="customerName" required autocomplete="name"></div><div><label for="customerEmail">Email address *</label><input id="customerEmail" type="email" required autocomplete="email"></div></div><label for="address">Street address *</label><input id="address" required autocomplete="street-address"><div class="fields"><div><label for="city">City *</label><input id="city" required autocomplete="address-level2"></div><div><label for="state">State *</label><select id="state" required><option value="">Select state</option><option>Alabama</option><option>Arizona</option><option>Arkansas</option><option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option><option>Florida</option><option>Georgia</option><option>Idaho</option><option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option><option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option><option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option><option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option><option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option><option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option><option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option><option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option><option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option><option>Wisconsin</option><option>Wyoming</option></select></div></div><label for="zip">ZIP code *</label><input id="zip" required inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}(-[0-9]{4})?"><label for="notes">Additional notes (optional)</label><textarea id="notes" rows="3" placeholder="Anything else we should know?"></textarea></div>
-<div class="notice"><strong>Payment:</strong> After we review your order and calculate shipping, we'll privately send you payment instructions. Venmo is currently planned as the payment method. No payment is collected through this form.</div><button class="btn" type="submit">SUBMIT ORDER REQUEST</button><div id="formMessage" class="small" aria-live="polite"></div><p class="small">Website preview only: this form is not connected to an order inbox yet. Do not enter real personal information until the form has been connected and tested.</p></form></section>
+<div class="notice"><strong>Payment:</strong> After we review your order and calculate shipping, we'll privately send you payment instructions. Venmo is currently planned as the payment method. No payment is collected through this form.</div><button class="btn" type="submit">SUBMIT ORDER REQUEST</button><div id="formMessage" class="small" aria-live="polite"></div><p class="small">When you submit, your email app will open with your order details filled in. Review the message and press Send to send your request to MODPOD. Your order is not submitted until you send that email.</p></form></section>
 <section id="shipping"><div class="eyebrow">DELIVERY INFORMATION</div><h2>SHIPPING</h2><div class="card"><h3>Continental United States Only</h3><p>MODPOD currently ships only within the contiguous 48 states. We do not ship to Alaska, Hawaii, US territories, or international destinations.</p><hr class="rule"><h3>Shipping Cost</h3><p>Shipping will be calculated after your order is reviewed. We'll confirm the shipping cost and full amount before payment.</p></div></section>
-<section id="contact"><div class="eyebrow">GET IN TOUCH</div><h2>CONTACT</h2><p>Have a question about MODPOD or your order?</p><div class="card"><h3>Email</h3><p>[Your contact email will be added here]</p></div></section>
+<section id="contact"><div class="eyebrow">GET IN TOUCH</div><h2>CONTACT</h2><p>Have a question about MODPOD or your order?</p><div class="card"><h3>Email</h3><p><a href="mailto:modpodsforall@gmail.com" style="color:white">modpodsforall@gmail.com</a></p></div></section>
 <footer><div class="logo">MODPOD</div><p>SIMPLE DESIGN. EVERYDAY FUNCTION.</p><p>© MODPOD — ALL RIGHTS RESERVED</p></footer>
 <script>
 const podNames=["THE PAIR","THE SLIM","THE QUARTET","THE BIG DAWG","THE NEST EGG","THE FAT WAD","THE JUST IN CASE (JIC)","THE PAPER OR PLASTIC (POP)"];
 let nextId=2;const podLines=document.getElementById("podLines");
 function addLine(data={id:nextId++,pod:podNames[0],color:"Black",side:"Left",qty:1}){const line=document.createElement("div");line.className="pod-line";line.dataset.id=data.id;line.innerHTML=`<div class="summary-row"><strong>Pod selection</strong><button type="button" class="btn btn-outline remove">REMOVE</button></div><div><label>Pod</label><select class="pod">${podNames.map(v=>`<option ${v===data.pod?"selected":""}>${v}</option>`).join("")}</select></div><div class="fields"><div><label>Color</label><select class="color"><option ${data.color==="Black"?"selected":""}>Black</option><option ${data.color==="Gray"?"selected":""}>Gray</option></select></div><div><label>Side</label><select class="side"><option ${data.side==="Left"?"selected":""}>Left</option><option ${data.side==="Right"?"selected":""}>Right</option></select></div></div><div><label>Quantity</label><input class="qty" type="number" min="1" step="1" value="${data.qty}" required></div><div class="small lineTotal"></div>`;line.querySelectorAll("select,input").forEach(el=>el.addEventListener("change",updateTotals));line.querySelector(".qty").addEventListener("input",updateTotals);line.querySelector(".remove").addEventListener("click",()=>{if(podLines.children.length>1){line.remove();updateTotals();}});podLines.appendChild(line);updateTotals();}
 function updateTotals(){let count=0;document.querySelectorAll(".pod-line").forEach(line=>{const input=line.querySelector(".qty");let qty=Math.max(1,Math.floor(Number(input.value)||1));input.value=qty;count+=qty;line.querySelector(".lineTotal").textContent=qty+" × $5.00 = $"+(qty*5).toFixed(2);});const pins=Math.floor(count/2),amount=count*5;document.getElementById("podQty").textContent=count;document.getElementById("subtotal").textContent="$"+amount.toFixed(2);document.getElementById("total").textContent="$"+amount.toFixed(2);document.getElementById("pinQty").textContent=pins;document.getElementById("pinSummary").textContent=pins;}
-document.getElementById("addPod").addEventListener("click",()=>addLine());document.getElementById("orderForm").addEventListener("submit",function(e){e.preventDefault();let count=0;document.querySelectorAll(".qty").forEach(input=>count+=Number(input.value)||0);if(count<2){alert("The minimum order is 2 Pods.");return;}if(!this.reportValidity())return;document.getElementById("formMessage").textContent="Preview only: your order has not been sent. The order form must be connected to a submission service before accepting real orders.";});addLine({id:1,pod:podNames[0],color:"Black",side:"Left",qty:2});
+document.getElementById("addPod").addEventListener("click",()=>addLine());
+document.getElementById("orderForm").addEventListener("submit",function(e){
+ e.preventDefault();
+ if(!this.reportValidity()) return;
+ const lines=[...document.querySelectorAll(".pod-line")];
+ const orderLines=lines.map((line,index)=>{
+  const pod=line.querySelector(".pod").value;
+  const color=line.querySelector(".color").value;
+  const side=line.querySelector(".side").value;
+  const qty=Math.max(1,Math.floor(Number(line.querySelector(".qty").value)||1));
+  return `${index+1}. ${pod} | Color: ${color} | Side: ${side} | Quantity: ${qty} | Line total: $${(qty*5).toFixed(2)}`;
+ });
+ const count=lines.reduce((sum,line)=>sum+Math.max(1,Math.floor(Number(line.querySelector(".qty").value)||1)),0);
+ if(count<2){alert("The minimum order is 2 Pods.");return;}
+ const state=document.getElementById("state").value;
+ const allowedStates=["Alabama","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
+ if(!allowedStates.includes(state)){alert("MODPOD currently ships only to the contiguous 48 states.");return;}
+ const pins=Math.floor(count/2), subtotal=count*5;
+ const body=[
+  "MODPOD ORDER REQUEST",
+  "",
+  "CUSTOMER INFORMATION",
+  `Name: ${document.getElementById("customerName").value.trim()}`,
+  `Email: ${document.getElementById("customerEmail").value.trim()}`,
+  `Address: ${document.getElementById("address").value.trim()}`,
+  `City: ${document.getElementById("city").value.trim()}`,
+  `State: ${state}`,
+  `ZIP: ${document.getElementById("zip").value.trim()}`,
+  "",
+  "POD ORDER",
+  ...orderLines,
+  "",
+  `Total Pods: ${count}`,
+  `Pod subtotal: $${subtotal.toFixed(2)}`,
+  `Free Joint Pins: ${pins}`,
+  `Joint Pin color: ${document.getElementById("pinColor").value}`,
+  "Shipping: To be calculated and confirmed by MODPOD before payment.",
+  "",
+  `Additional notes: ${document.getElementById("notes").value.trim() || "None"}`,
+  "",
+  "This is an order request, not a completed purchase. Please contact the customer to confirm shipping and payment."
+ ].join("\n");
+ const subject=`MODPOD Order Request - ${document.getElementById("customerName").value.trim()}`;
+ const mailto=`mailto:modpodsforall@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+ document.getElementById("formMessage").textContent="Your email app should open with the order details. Review everything and press Send to submit your order request to MODPOD.";
+ window.location.href=mailto;
+});
+addLine({id:1,pod:podNames[0],color:"Black",side:"Left",qty:2});
 </script></body></html>
